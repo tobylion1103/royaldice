@@ -4,11 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { THEMES } from "@/lib/site";
-import ThemeLogo from "@/components/ThemeLogo";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function Header() {
+  const { user, openFlow } = useAuth();
   const pathname = usePathname();
-  const currentGame = pathname.startsWith("/coinflip") ? "coinflip" : "dice";
+  const currentGame = pathname.startsWith("/coinflip")
+    ? "coinflip"
+    : pathname.startsWith("/wheel")
+      ? "wheel"
+      : "dice";
   const [gamesOpen, setGamesOpen] = useState(false);
   const [themeOpen, setThemeOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,9 +49,22 @@ export default function Header() {
           Games ▾
         </button>
         {gamesOpen && (
-          <div className="menu-pop">
-            <Link href="/" onClick={() => setGamesOpen(false)}>Color Dice {currentGame === "dice" ? "•" : ""}</Link>
-            <Link href="/coinflip" onClick={() => setGamesOpen(false)}>Coin Flip {currentGame === "coinflip" ? "•" : ""}</Link>
+          <div className="menu-pop games-pop">
+            {[
+              { href: "/", id: "dice", label: "Royal Dice" },
+              { href: "/coinflip", id: "coinflip", label: "Coin Flip" },
+              { href: "/wheel", id: "wheel", label: "Royal Wheel" },
+            ].map((g) => (
+              <Link
+                key={g.id}
+                href={g.href}
+                className={`games-item ${currentGame === g.id ? "is-on" : ""}`}
+                onClick={() => setGamesOpen(false)}
+              >
+                <span>{g.label}</span>
+                <i className="games-dot" />
+              </Link>
+            ))}
           </div>
         )}
       </div>
@@ -57,7 +75,7 @@ export default function Header() {
           Theme ▾
         </button>
         {themeOpen && (
-          <div className="menu-pop">
+          <div className="menu-pop theme-pop">
             <div className="theme-grid">
               {THEMES.map((t) => (
                 <button key={t.id} type="button" onClick={() => applyTheme(t.id)}>
@@ -85,7 +103,7 @@ export default function Header() {
       >
         <div className="rdtb-inner" style={{ maxWidth: 1080, margin: "0 auto", padding: "10px 18px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14 }}>
           <Link href="/" style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }} aria-label="RoyalDice home">
-            <ThemeLogo alt="RoyalDice" height={34} />
+            <img src="/logo.png" alt="RoyalDice" className="header-logo" />
           </Link>
           <nav className="rdtb-desktopnav" style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }} aria-label="Primary">
             {nav}
@@ -93,8 +111,22 @@ export default function Header() {
           <div className="rdtb-right" style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <span className="online-pill rdtb-online-label">
               <span className="online-dot" />
-              {online ?? "—"} online
+              Online {online ?? "—"}
             </span>
+            {user ? (
+              <Link href="/account" className="user-chip">
+                {user.avatar ? (
+                  <img src={user.avatar} alt="" className="user-chip-av" />
+                ) : (
+                  <span className="chat-avatar-default user-chip-av" />
+                )}
+                {user.displayName || user.name}
+              </Link>
+            ) : (
+              <button type="button" className="user-chip" onClick={() => openFlow("signup")}>
+                Sign in
+              </button>
+            )}
             <button
               className="rdtb-burger"
               aria-label="Menu"

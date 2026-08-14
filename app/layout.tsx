@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 import SocialBar from "@/components/SocialBar";
+import { AuthProvider } from "@/components/AuthProvider";
+import AuthFlow from "@/components/AuthFlow";
 
 export const metadata: Metadata = {
   title: "RoyalDice.eu | Provably Fair Color Dice",
@@ -30,11 +32,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <Header />
-        <ChatWidget />
-        <div className="site-main">{children}</div>
-        <Footer />
-        <SocialBar />
+        <AuthProvider>
+          <div className="starfield site-stars" />
+          <Header />
+          <ChatWidget />
+          <div className="site-main">{children}</div>
+          <Footer />
+          <SocialBar />
+          <AuthFlow />
+        </AuthProvider>
       </body>
     </html>
   );

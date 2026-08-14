@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useAuth } from "@/components/AuthProvider";
 
 type Msg = { id: string; name: string; text: string; at: number; color?: string };
 
@@ -27,6 +28,15 @@ export default function ChatWidget() {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState<Msg[]>([]);
   const logRef = useRef<HTMLDivElement>(null);
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user?.name) {
+      setName(user.name);
+      localStorage.setItem(NAME_KEY, user.name);
+    }
+  }, [user]);
 
   useEffect(() => {
     const stored = localStorage.getItem(NAME_KEY);
