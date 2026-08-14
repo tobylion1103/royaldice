@@ -157,7 +157,20 @@ body:before{content:"";position:fixed;inset:0;z-index:-2;background-image:var(--
   radial-gradient(1px 1px at 30% 80%, #fff, transparent);animation:twinkle 3.8s ease-in-out infinite}
 .auth-rays{position:absolute;inset:-20%;background:conic-gradient(from 0deg, transparent 0 8%, rgba(168,85,247,.18) 10%, transparent 14% 28%, rgba(192,132,252,.12) 32%, transparent 36% 100%);animation:spinRays 18s linear infinite;filter:blur(8px);pointer-events:none}
 @keyframes spinRays{to{transform:rotate(360deg)}}
-.auth-card{position:relative;z-index:2;text-align:center;max-width:400px;padding-top:18px;box-shadow:0 0 0 1px rgba(168,85,247,.35),0 0 80px rgba(168,85,247,.28)}
+.auth-card{position:relative;z-index:2;text-align:center;max-width:400px;padding-top:18px;box-shadow:0 0 0 1px rgba(168,85,247,.35),0 0 80px rgba(168,85,247,.28);overflow:hidden}
+.rd-avatar-file{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0,0,0,0) !important;
+  border:0 !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+  display:block !important;
+}
 .auth-die{width:72px;height:72px;margin:0 auto 16px;border-radius:18px;background:linear-gradient(160deg,#c084fc,#7c3aed 55%,#4c1d95);display:grid;place-items:center;box-shadow:0 0 0 6px rgba(168,85,247,.18),0 0 40px rgba(168,85,247,.7);animation:diePulse 2.2s ease-in-out infinite}
 .auth-die-pip{width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.35)}
 @keyframes diePulse{50%{transform:translateY(-4px) scale(1.04);box-shadow:0 0 0 8px rgba(168,85,247,.12),0 0 58px rgba(192,132,252,.9)}}

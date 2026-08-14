@@ -174,7 +174,14 @@ export default function AuthFlow() {
             <button type="button" className="rd-avatar-btn" onClick={() => fileRef.current?.click()} aria-label="Choose picture">
               {preview ? <img src={preview} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <span className="rd-avatar-plus">+</span>}
             </button>
-            <input ref={fileRef} type="file" accept="image/*" hidden onChange={(e) => onFile(e.target.files?.[0])} />
+            <input
+              ref={fileRef}
+              className="rd-avatar-file"
+              type="file"
+              accept="image/*"
+              tabIndex={-1}
+              onChange={(e) => onFile(e.target.files?.[0])}
+            />
             {error && <p className="rd-modal-error">{error}</p>}
             <button
               type="button"
@@ -182,9 +189,14 @@ export default function AuthFlow() {
               disabled={busy}
               onClick={() => (preview ? completeSignup(preview) : fileRef.current?.click())}
             >
-              Upload a picture
+              {preview ? "Continue" : "Upload a picture"}
             </button>
-            <button type="button" className="auth-ghost" disabled={busy} onClick={() => completeSignup(null)}>
+            <button
+              type="button"
+              className="auth-ghost"
+              disabled={busy}
+              onClick={() => completeSignup(preview)}
+            >
               Skip for now
             </button>
           </div>
