@@ -10,6 +10,7 @@ export async function POST(req: Request) {
   const name = String(body.name || "Guest");
   const text = String(body.text || "").trim();
   if (!text) return NextResponse.json({ ok: false }, { status: 400 });
-  const msg = addChat(name, text);
+  const color = String(body.color || "");
+  const msg = addChat(name, text, color);
   return NextResponse.json({ ok: true, message: msg });
 }

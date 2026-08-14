@@ -90,21 +90,31 @@ export function getResult(id: string) {
 
 const chatFile = path.join(dataDir, "chat.json");
 
-export type ChatMessage = { id: string; name: string; text: string; at: number };
+export type ChatMessage = { id: string; name: string; text: string; at: number; color?: string };
 
-export function getChat(): ChatMessage[] {
-  return readJson<ChatMessage[]>(chatFile, []);
+function startOfUtcDay(ts = Date.now()) {
+  const d = new Date(ts);
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
 }
 
-export function addChat(name: string, text: string) {
+export function getChat(): ChatMessage[] {
+  const all = readJson<ChatMessage[]>(chatFile, []);
+  const start = startOfUtcDay();
+  const today = all.filter((m) => m.at >= start);
+  if (today.length !== all.length) writeJson(chatFile, today);
+  return today;
+}
+
+export function addChat(name: string, text: string, color?: string) {
   const list = getChat();
   const msg: ChatMessage = {
     id: randomBytes(4).toString("hex"),
     name: name.slice(0, 24) || "Guest",
     text: text.slice(0, 240),
     at: Date.now(),
+    color,
   };
   list.push(msg);
-  writeJson(chatFile, list.slice(-80));
+  writeJson(chatFile, list.slice(-120));
   return msg;
 }

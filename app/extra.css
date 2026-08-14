@@ -17,14 +17,18 @@
 .rdtb-mobile{display:none;position:absolute;left:0;right:0;top:100%;padding:10px 14px 16px;background:var(--ov-2);border-bottom:1px solid var(--panel-border);z-index:70}
 .rdtb-mobile.open{display:block}
 @media (min-width:1001px){.rdtb-mobile{display:none !important}}
-.chat-panel{position:fixed;right:18px;top:140px;z-index:1001;width:min(360px,calc(100vw - 28px));height:min(520px,calc(100vh - 180px));display:flex;flex-direction:column;border-radius:18px;border:1px solid var(--panel-border);background:var(--ov-2);box-shadow:var(--shadow);overflow:hidden}
-.chat-panel header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--panel-border);font-weight:700}
-.chat-log{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
-.chat-line{font-size:13px;line-height:1.4;color:var(--text)}
-.chat-line b{color:var(--accent-soft)}
-.chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--panel-border)}
-.chat-form input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--panel-border);background:var(--panel-bg);color:var(--text)}
-.chat-form button{padding:10px 12px;border:none;border-radius:10px;background:var(--accent);color:#fff;cursor:pointer;font-weight:700}
+.chat-head-left{display:flex;align-items:baseline;gap:8px;min-width:0}
+.chat-avatar-default{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#c084fc 0 28%,#7c3aed 29% 100%);display:grid;place-items:center;flex:0 0 auto}
+.chat-avatar-default:after{content:"";width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.chat-messages{scrollbar-width:auto;scrollbar-color:#cfc8d8 #f3f1f6}
+.chat-messages::-webkit-scrollbar{width:14px}
+.chat-messages::-webkit-scrollbar-track{background:#f3f1f6;border-radius:8px}
+.chat-messages::-webkit-scrollbar-thumb{background:#c4bccf;border-radius:8px;border:2px solid #f3f1f6}
+.chat-bubble{border-radius:18px !important;padding:9px 13px !important}
+.chat-input{align-items:center}
+.chat-input input{border-radius:18px !important;padding:11px 16px !important}
+.chat-input button{height:42px;min-width:64px}
+.chat-settings{background:rgba(0,0,0,.18)}
 .sab-panel{background:var(--panel-bg);border:2px solid var(--panel-border);border-radius:18px;padding:16px}
 .sab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
 .sab-cell{text-align:center;padding:10px 6px;border-radius:12px;border:1px solid var(--panel-border);background:var(--panel-2-bg)}
