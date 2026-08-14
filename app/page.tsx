@@ -3,12 +3,13 @@ import DiceRoller from "@/components/DiceRoller";
 import SabCounter from "@/components/SabCounter";
 import ChancesOfWinning from "@/components/ChancesOfWinning";
 import HowItWorks from "@/components/HowItWorks";
+import ThemeLogo from "@/components/ThemeLogo";
 
 export default function HomePage() {
   return (
     <main className="shell home">
       <div className="home-logo">
-        <img id="rd-home-logo" src="/logo.png" alt="RoyalDice.eu" />
+        <ThemeLogo alt="RoyalDice.eu" />
       </div>
       <div className="home-columns">
         <div className="home-sab-slot">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { THEMES } from "@/lib/site";
+import ThemeLogo from "@/components/ThemeLogo";
 
 export default function Header() {
   const pathname = usePathname();
@@ -84,7 +85,7 @@ export default function Header() {
       >
         <div className="rdtb-inner" style={{ maxWidth: 1080, margin: "0 auto", padding: "10px 18px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14 }}>
           <Link href="/" style={{ display: "inline-flex", alignItems: "center", flexShrink: 0 }} aria-label="RoyalDice home">
-            <img src="/logo.png" alt="RoyalDice" style={{ height: 34, width: "auto", display: "block" }} />
+            <ThemeLogo alt="RoyalDice" height={34} />
           </Link>
           <nav className="rdtb-desktopnav" style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }} aria-label="Primary">
             {nav}
