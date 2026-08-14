@@ -121,6 +121,7 @@ export default function RoyalWheel() {
   }
 
   function onDragStart(e: React.PointerEvent) {
+    if (window.matchMedia("(max-width: 1000px)").matches) return;
     drag.current = { dx: e.clientX - panel.x, dy: e.clientY - panel.y };
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
   }

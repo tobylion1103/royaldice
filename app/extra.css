@@ -18,10 +18,16 @@
 .theme-grid button{
   width:100%;border-radius:10px;transition:box-shadow .2s,transform .2s,background .2s,color .2s
 }
-.theme-grid button:hover{
-  background:rgba(168,85,247,.22);
+@media (hover:hover){
+  .theme-grid button:hover{
+    background:rgba(168,85,247,.22);
+    color:#fff;
+    animation:themeFlash .7s ease-in-out infinite;
+  }
+}
+.theme-grid button:active{
+  background:rgba(168,85,247,.28);
   color:#fff;
-  animation:themeFlash .7s ease-in-out infinite;
 }
 @keyframes themeFlash{
   0%,100%{box-shadow:0 0 0 1px rgba(168,85,247,.35),0 0 8px rgba(168,85,247,.25)}
@@ -33,10 +39,10 @@
 .chat-head-left{display:flex;align-items:baseline;gap:8px;min-width:0}
 .chat-avatar-default{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#c084fc 0 28%,#7c3aed 29% 100%);display:grid;place-items:center;flex:0 0 auto}
 .chat-avatar-default:after{content:"";width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
-.chat-messages{scrollbar-width:auto;scrollbar-color:#cfc8d8 #f3f1f6}
-.chat-messages::-webkit-scrollbar{width:14px}
-.chat-messages::-webkit-scrollbar-track{background:#f3f1f6;border-radius:8px}
-.chat-messages::-webkit-scrollbar-thumb{background:#c4bccf;border-radius:8px;border:2px solid #f3f1f6}
+.chat-messages{scrollbar-width:thin;scrollbar-color:#5a4a6c #1a101c}
+.chat-messages::-webkit-scrollbar{width:8px}
+.chat-messages::-webkit-scrollbar-track{background:#1a101c;border-radius:8px}
+.chat-messages::-webkit-scrollbar-thumb{background:#5a4a6c;border-radius:8px}
 .chat-bubble{border-radius:18px !important;padding:9px 13px !important}
 .chat-input{align-items:center}
 .chat-input input{border-radius:18px !important;padding:11px 16px !important}
@@ -329,3 +335,90 @@ body:before{content:"";position:fixed;inset:0;z-index:-2;background-image:var(--
 [data-coin=platinum-mirror]{--coin-a:#f8fafc;--coin-b:#94a3b8;--coin-c:#334155;--coin-glow:rgba(226,232,240,.45)}
 [data-coin=rose-gold]{--coin-a:#ffe4e6;--coin-b:#fb7185;--coin-c:#9f1239;--coin-glow:rgba(251,113,133,.5)}
 [data-coin=molten-lava]{--coin-a:#fde68a;--coin-b:#f97316;--coin-c:#7c2d12;--coin-glow:rgba(249,115,22,.55)}
+
+@media (hover:hover){
+  .rdtb-desktopnav a:hover,.rdtb-desktopnav button:hover,.rdtb-mobile a:hover,.rdtb-mobile button:hover{
+    animation:navFlash .55s ease-in-out infinite;
+  }
+}
+@media (hover:none){
+  .rdtb-desktopnav a:hover,.rdtb-desktopnav button:hover,.rdtb-mobile a:hover,.rdtb-mobile button:hover{
+    animation:none;
+  }
+  .rdtb-mobile a:active,.rdtb-mobile button:active{
+    background:rgba(168,85,247,.35);
+    color:#fff;
+  }
+}
+
+@media (max-width:1000px){
+  body:before{
+    background-attachment:scroll !important;
+    height:100dvh;
+    min-height:100dvh;
+    background-position:center top;
+  }
+  .rdtb-inner{padding:8px 12px !important;gap:8px !important}
+  .header-logo{height:28px}
+  .user-chip{max-width:112px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rdtb-mobile.open{
+    display:flex !important;
+    flex-direction:column;
+    max-height:min(78vh,640px);
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-color:#5a4a6c #1a101c;
+  }
+  .rdtb-mobile .menu-pop{
+    position:static;
+    width:100%;
+    min-width:0;
+    margin:4px 0 10px;
+    box-shadow:none;
+  }
+  .rdtb-mobile .theme-pop{right:auto;left:0}
+  .theme-grid{max-height:240px;min-width:0;width:100%}
+  .chat-fab{top:auto !important;bottom:max(18px, env(safe-area-inset-bottom)) !important;right:max(14px, env(safe-area-inset-right)) !important}
+  .chat-panel{
+    top:auto !important;
+    bottom:78px !important;
+    right:10px !important;
+    left:10px !important;
+    width:auto !important;
+    max-width:none !important;
+    height:min(70dvh,560px) !important;
+  }
+  .social-bar{padding-bottom:max(8px,env(safe-area-inset-bottom))}
+  .shell,.shell.home{padding:18px 12px 96px}
+  .home-logo img{max-height:72px}
+  .play-toolbar{flex-direction:column}
+  .play-toolbar .count-dropdown{width:100%}
+  .panel{padding:18px !important}
+  .rd-stats{gap:8px}
+  .rd-stat{padding:10px 4px}
+  .guide-card{width:100% !important}
+  .flip-page{padding:16px 12px 110px}
+  .coin-stage{padding-top:48px;min-height:280px}
+  .coin3d{width:160px;height:160px}
+  .coin-letter{font-size:56px}
+  .coin-toss.is-toss{animation-name:coinTossMobile}
+  @keyframes coinTossMobile{
+    0%{transform:translateY(0) scale(1)}
+    32%{transform:translateY(-88px) scale(1.08)}
+    100%{transform:translateY(0) scale(1)}
+  }
+  .wheel-stage{padding:8px 10px 110px;min-height:auto}
+  .wheel-dock{position:relative !important;left:0 !important;top:0 !important;width:100%;margin:0 auto 16px}
+  .wheel-dock-head{display:none}
+  .wheel-wrap{width:min(92vw,380px)}
+  .auth-card{max-width:100%;margin:0 8px}
+  .chat-settings input{width:100% !important}
+  .account-page{padding:20px 14px 100px}
+  .site-footer-inner{padding:20px 14px}
+}
+
+@media (max-width:560px){
+  .rdtb-online-label{display:none !important}
+  .flip-status{font-size:28px}
+  .rd-pf-avatar-row{flex-direction:column;align-items:flex-start}
+}

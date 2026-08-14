@@ -21,6 +21,12 @@ export default function Header() {
   const [theme, setTheme] = useState("black-purple");
 
   useEffect(() => {
+    setMenuOpen(false);
+    setGamesOpen(false);
+    setThemeOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     const t = localStorage.getItem("royal-dice-theme") || "black-purple";
     setTheme(t);
     document.documentElement.setAttribute("data-theme", t);
@@ -35,6 +41,7 @@ export default function Header() {
     localStorage.setItem("royal-dice-theme", id);
     document.documentElement.setAttribute("data-theme", id);
     setThemeOpen(false);
+    setMenuOpen(false);
   }
 
   function openSab() {
@@ -43,7 +50,7 @@ export default function Header() {
 
   const nav = (
     <>
-      <Link href="/">Play</Link>
+      <Link href="/" onClick={() => setMenuOpen(false)}>Play</Link>
       <div style={{ position: "relative" }}>
         <button type="button" onClick={() => { setGamesOpen((v) => !v); setThemeOpen(false); }}>
           Games ▾
@@ -59,7 +66,10 @@ export default function Header() {
                 key={g.id}
                 href={g.href}
                 className={`games-item ${currentGame === g.id ? "is-on" : ""}`}
-                onClick={() => setGamesOpen(false)}
+                onClick={() => {
+                  setGamesOpen(false);
+                  setMenuOpen(false);
+                }}
               >
                 <span>{g.label}</span>
                 <i className="games-dot" />
@@ -68,7 +78,7 @@ export default function Header() {
           </div>
         )}
       </div>
-      <Link href="/verify">Verify</Link>
+      <Link href="/verify" onClick={() => setMenuOpen(false)}>Verify</Link>
       <button type="button" onClick={openSab}>SabCounter</button>
       <div style={{ position: "relative" }}>
         <button type="button" onClick={() => { setThemeOpen((v) => !v); setGamesOpen(false); }}>
@@ -137,7 +147,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-        <div className={`rdtb-mobile ${menuOpen ? "open" : ""}`} style={{ display: menuOpen ? "block" : undefined }}>
+        <div className={`rdtb-mobile ${menuOpen ? "open" : ""}`}>
           <nav style={{ display: "flex", flexDirection: "column", gap: 6 }}>{nav}</nav>
         </div>
       </header>

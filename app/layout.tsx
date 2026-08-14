@@ -8,6 +8,13 @@ import SocialBar from "@/components/SocialBar";
 import { AuthProvider } from "@/components/AuthProvider";
 import AuthFlow from "@/components/AuthFlow";
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#05030b",
+};
+
 export const metadata: Metadata = {
   title: "RoyalDice.eu | Provably Fair Color Dice",
   description:
